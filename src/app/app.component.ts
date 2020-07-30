@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertModalService } from './alert-modal/alertModal.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'alertModal';
+  alertDetails = {
+    title: 'Title',
+    message: 'Hello',
+    cancelButton : { show: true, name: 'Close'},
+    confirmButton: { show: true, name: 'Confirm'},
+  };
+  constructor(
+    private alertModalService: AlertModalService,
+  ) {
+    this.alertModalService.openPopup(this.alertDetails).subscribe(result => {
+      console.log('Hello I am the result of modal popup', result);
+    });
+  }
 }
